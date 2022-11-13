@@ -11,10 +11,10 @@ defmodule SimpleAuthApiWeb.SessionController do
         {:ok, access_token, _claims} =
           Guardian.encode_and_sign(user, %{}, token_type: "access", ttl: {1, :hour})
 
-          conn
+        conn
         |> put_resp_cookie("ruid", access_token)
         |> put_status(:created)
-        |> render("teste.json")
+        |> render("teste.json", access_token: access_token)
 
       {:error, :unauthorized} ->
         body = Jason.encode!(%{error: "Não autorizado."})

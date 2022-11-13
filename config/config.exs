@@ -41,6 +41,6 @@ config :phoenix, :json_library, Jason
 # of this file so it overrides the configuration defined above.
 import_config "#{config_env()}.exs"
 
-config :auth_api, AuthApi.Guardian,
-  issuer: "auth_api",
+config :simple_auth_api, SimpleAuthApi.Authentication.Guardian,
+  issuer: "simple_auth_api",
   secret_key: System.get_env("SECRET_KEY")

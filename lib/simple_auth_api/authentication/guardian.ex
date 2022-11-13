@@ -7,9 +7,9 @@ defmodule SimpleAuthApi.Authentication.Guardian do
     {:ok, sub}
   end
 
-  def resources_from_claims(claims) do
+  def resource_from_claims(claims) do
     id = claims["sub"]
-    resource = Contas.get_by_id!(id)
+    resource = Contas.get_usuario!(id)
     {:ok, resource}
   end
 
