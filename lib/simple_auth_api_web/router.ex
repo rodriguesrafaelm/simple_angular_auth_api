@@ -5,8 +5,15 @@ defmodule SimpleAuthApiWeb.Router do
     plug :accepts, ["json"]
   end
 
+  pipeline :auth do
+    plug SimpleAuthApi.Authentication.Guardian.AuthPipeline
+  end
+
   scope "/api", SimpleAuthApiWeb do
     pipe_through :api
+
+    post "/teste", SessionController, :new
+    resources "/usuarios", UsuarioController, except: [:new, :edit]
   end
 
   # Enables LiveDashboard only for development

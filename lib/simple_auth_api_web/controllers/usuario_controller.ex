@@ -40,4 +40,18 @@ defmodule SimpleAuthApiWeb.UsuarioController do
       send_resp(conn, :no_content, "")
     end
   end
+
+
+
+
+
+  def register(conn, %{"user" => user_params}) do
+    with {:ok, %Usuario{} = user} <- Contas.add_user(user_params) do
+      conn
+      |> put_status(:created)
+      |> text("Usuário cadastrado com sucesso, usando o email:" <> " " <> user.email)
+
+    end
+  end
+
 end

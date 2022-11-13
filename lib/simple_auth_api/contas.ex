@@ -101,4 +101,36 @@ defmodule SimpleAuthApi.Contas do
   def change_usuario(%Usuario{} = usuario, attrs \\ %{}) do
     Usuario.changeset(usuario, attrs)
   end
+#===========================================
+
+
+  def add_user(attrs \\ %{}) do
+    %Usuario{}
+    |> Usuario.registration_changeset(attrs)
+    |> Repo.insert()
+  end
+
+  def get_user_by_username(username) do
+    query = from u in Usuario, where: u.username == ^username
+    case Repo.one(query) do
+      nil -> {:error, "Usuário não encontrado"}
+      user -> {:ok, user}
+    end
+  end
+
+
+  def authenticate_user(username, password) do
+    with {:ok, user} <- get_user_by_username(username) do
+      case verify_password(password, user.password) do
+        false -> {:error, :unauthorized}
+        true -> {:ok, user}
+      end
+    end
+  end
+
+  defp verify_password(password, encrypted_password) do
+    Pbkdf2.verify_pass(password, encrypted_password)
+  end
+
+
 end
