@@ -3,7 +3,7 @@
 
 
 Estou desenvolvendo essa API para consumir no meu projeto pessoal com angular.
-<a href="https://github.com/rodriguesrafaelm/simple_angular_auth">Link do projeot</a>
+<a href="https://github.com/rodriguesrafaelm/simple_angular_auth">Link do projeto</a>
 
 
 
