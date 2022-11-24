@@ -3,6 +3,8 @@ defmodule SimpleAuthApiWeb.UsuarioController do
 
   alias SimpleAuthApi.Contas
   alias SimpleAuthApi.Contas.Usuario
+  alias SimpleAuthApi.Authentication.Guardian
+
 
   action_fallback SimpleAuthApiWeb.FallbackController
 
@@ -11,14 +13,24 @@ defmodule SimpleAuthApiWeb.UsuarioController do
     render(conn, "index.json", usuarios: usuarios)
   end
 
-  def create(conn, %{"usuario" => usuario_params}) do
-    with {:ok, %Usuario{} = usuario} <- Contas.create_usuario(usuario_params) do
+  def create(conn, usuario_params) do
+    with {:ok, %Usuario{} = usuario} <- Contas.add_user(usuario_params) do
       conn
-      |> put_status(:created)
-      |> put_resp_header("location", Routes.usuario_path(conn, :show, usuario))
-      |> render("show.json", usuario: usuario)
+      |> autorize(usuario)
+      |> send_resp(200, '')
     end
   end
+
+  defp autorize(conn, usuario) do
+
+    {:ok, access_token, _claims} = Guardian.encode_and_sign(usuario, %{}, token_type: "access", ttl: {1, :hour})
+
+    conn
+    |> put_resp_header("Access-Control-Expose-Headers", "x-access-token")
+    |> put_resp_header("x-access-token", access_token)
+    |> put_status(:created)
+  end
+
 
   def show(conn, %{"id" => id}) do
     usuario = Contas.get_usuario!(id)

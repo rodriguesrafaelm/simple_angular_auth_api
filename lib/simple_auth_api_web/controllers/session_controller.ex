@@ -3,6 +3,7 @@ defmodule SimpleAuthApiWeb.SessionController do
 
   alias SimpleAuthApi.Contas
   alias SimpleAuthApi.Authentication.Guardian
+
   action_fallback SimpleAuthApiWeb.FallbackController
 
   def new(conn, %{"username" => username, "password" => password}) do
@@ -10,20 +11,23 @@ defmodule SimpleAuthApiWeb.SessionController do
       {:ok, user} ->
         {:ok, access_token, _claims} =
           Guardian.encode_and_sign(user, %{}, token_type: "access", ttl: {1, :hour})
-
         conn
-        |> put_resp_cookie("ruid", access_token)
+        |> put_resp_header("Access-Control-Expose-Headers", "x-access-token")
+        |> put_resp_header("x-access-token", access_token)
         |> put_status(:created)
-        |> render("teste.json", access_token: access_token)
+        |> send_resp(200, '')
+        |> IO.inspect()
 
-      {:error, :unauthorized} ->
-        body = Jason.encode!(%{error: "Não autorizado."})
+      {:error, message} ->
+        body = Jason.encode!(%{error: message})
         conn
           |> send_resp(401, body)
 
 
     end
   end
+
+
 
 
 
