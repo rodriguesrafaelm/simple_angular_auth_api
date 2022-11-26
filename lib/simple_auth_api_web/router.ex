@@ -9,11 +9,11 @@ defmodule SimpleAuthApiWeb.Router do
     plug SimpleAuthApi.Authentication.Guardian.AuthPipeline
   end
 
-  scope "", SimpleAuthApiWeb do
+  scope "/api", SimpleAuthApiWeb do
     pipe_through :api
 
     post "/user/login", SessionController, :new
-    post "/user/signup", UsuarioController, :create
+    post "/user/signup", SessionController, :create
 
 
     resources "/usuarios", UsuarioController, except: [:new, :edit]

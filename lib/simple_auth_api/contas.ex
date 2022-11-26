@@ -94,55 +94,5 @@ defmodule SimpleAuthApi.Contas do
     |> Repo.insert()
   end
 
-  @doc """
-  Updates a usuario.
-
-  ## Examples
-
-      iex> update_usuario(usuario, %{field: new_value})
-      {:ok, %Usuario{}}
-
-      iex> update_usuario(usuario, %{field: bad_value})
-      {:error, %Ecto.Changeset{}}
-
-  """
-  def update_usuario(%Usuario{} = usuario, attrs) do
-    usuario
-    |> Usuario.changeset(attrs)
-    |> Repo.update()
-  end
-
-  @doc """
-  Deletes a usuario.
-
-  ## Examples
-
-      iex> delete_usuario(usuario)
-      {:ok, %Usuario{}}
-
-      iex> delete_usuario(usuario)
-      {:error, %Ecto.Changeset{}}
-
-  """
-  def delete_usuario(%Usuario{} = usuario) do
-    Repo.delete(usuario)
-  end
-
-  @doc """
-  Returns an `%Ecto.Changeset{}` for tracking usuario changes.
-
-  ## Examples
-
-      iex> change_usuario(usuario)
-      %Ecto.Changeset{data: %Usuario{}}
-
-  """
-  def change_usuario(%Usuario{} = usuario, attrs \\ %{}) do
-    Usuario.changeset(usuario, attrs)
-  end
-
-
-
-
 
 end
