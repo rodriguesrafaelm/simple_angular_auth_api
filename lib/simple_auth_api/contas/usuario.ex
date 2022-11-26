@@ -22,7 +22,7 @@ defmodule SimpleAuthApi.Contas.Usuario do
     user
     |> cast(attrs, [:email, :username, :password])
     |> validate_required([:email, :username, :password])
-    |> unique_constraint(:email)
+    |> unique_constraint([:email, :username])
     |> encrypt_and_put_password()
   end
 
