@@ -94,5 +94,6 @@ defmodule SimpleAuthApi.Contas do
     |> Repo.insert()
   end
 
+  
 
 end
