@@ -43,6 +43,16 @@ defmodule SimpleAuthApi.Contas do
     Pbkdf2.verify_pass(password, encrypted_password)
   end
 
+
+  def verify_username_availability(""), do: ""
+  def verify_username_availability(username) do
+    case get_user_by_username(username) do
+      {:error, _message} -> "Usuário disponível"
+      {:ok, _user} -> "Usuário já existe"
+
+    end
+  end
+
   # Default \/
 
 
@@ -94,6 +104,6 @@ defmodule SimpleAuthApi.Contas do
     |> Repo.insert()
   end
 
-  
+
 
 end

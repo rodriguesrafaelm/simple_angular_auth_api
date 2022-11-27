@@ -3,7 +3,7 @@ defmodule SimpleAuthApiWeb.UsuarioController do
 
   alias SimpleAuthApi.Contas
   alias SimpleAuthApi.Contas.Usuario
- 
+
 
 
   action_fallback SimpleAuthApiWeb.FallbackController
@@ -15,9 +15,6 @@ defmodule SimpleAuthApiWeb.UsuarioController do
 
 
 
-
-
-
   def register(conn, %{"user" => user_params}) do
     with {:ok, %Usuario{} = user} <- Contas.add_user(user_params) do
       conn
@@ -26,5 +23,14 @@ defmodule SimpleAuthApiWeb.UsuarioController do
 
     end
   end
+
+
+  def verificar_disponinibilidade(conn, %{"username" => username}) do
+    IO.inspect(username)
+    body = Contas.verify_username_availability(username)
+    conn
+    |> send_resp(200, body)
+  end
+
 
 end

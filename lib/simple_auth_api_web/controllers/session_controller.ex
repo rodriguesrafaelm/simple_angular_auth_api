@@ -18,7 +18,7 @@ defmodule SimpleAuthApiWeb.SessionController do
       {:error, message} ->
         body = Jason.encode!(%{error: message})
         conn
-          |> send_resp(401, body)
+        |> send_resp(401, body)
 
 
     end
