@@ -47,8 +47,8 @@ defmodule SimpleAuthApi.Contas do
   def verify_username_availability(""), do: ""
   def verify_username_availability(username) do
     case get_user_by_username(username) do
-      {:error, _message} -> "Usuário disponível"
-      {:ok, _user} -> "Usuário já existe"
+      {:error, _message} -> %{message: "true"}
+      {:ok, _user} -> %{message: "false"}
 
     end
   end

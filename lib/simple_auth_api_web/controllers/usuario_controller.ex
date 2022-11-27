@@ -28,8 +28,10 @@ defmodule SimpleAuthApiWeb.UsuarioController do
   def verificar_disponinibilidade(conn, %{"username" => username}) do
     IO.inspect(username)
     body = Contas.verify_username_availability(username)
+
     conn
-    |> send_resp(200, body)
+    |> put_status(200)
+    |> json(body)
   end
 
 
