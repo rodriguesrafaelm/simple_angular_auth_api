@@ -8,7 +8,7 @@ defmodule SimpleAuthApi.Authentication.Guardian.AuthPipeline do
     error_handler: AuthApi.Guardian.AuthErrorHandler
 
 
-  plug(Guardian.Plug.VerifyHeader, claims: @claims, realm: "Bearer")
+  plug(Guardian.Plug.VerifyHeader, claims: @claims, scheme: "Bearer")
   plug(Guardian.Plug.EnsureAuthenticated)
   plug(Guardian.Plug.LoadResource, ensure: true)
 

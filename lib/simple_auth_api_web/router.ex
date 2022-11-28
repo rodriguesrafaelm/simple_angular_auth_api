@@ -15,7 +15,7 @@ defmodule SimpleAuthApiWeb.Router do
     post "/user/login", SessionController, :new
     post "/user/signup", SessionController, :create
 
-    post  "/user/get-user", UsuarioController, :verificar_disponinibilidade
+    post  "/user/get-user", UsuarioController, :verificar_disponibilidade
 
   end
 

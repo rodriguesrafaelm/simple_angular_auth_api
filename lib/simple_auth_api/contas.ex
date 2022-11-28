@@ -20,6 +20,7 @@ defmodule SimpleAuthApi.Contas do
 
   def get_user_by_username(username) do
     query = from u in Usuario, where: u.username == ^username
+    IO.inspect(Repo.one(query))
     case Repo.one(query) do
       nil -> {:error, "Usuário não encontrado"}
       user -> {:ok, user}
@@ -47,8 +48,8 @@ defmodule SimpleAuthApi.Contas do
   def verify_username_availability(""), do: ""
   def verify_username_availability(username) do
     case get_user_by_username(username) do
-      {:error, _message} -> %{message: "true"}
-      {:ok, _user} -> %{message: "false"}
+      {:error, _message} -> %{message: true}
+      {:ok, _user} -> %{message: false}
 
     end
   end

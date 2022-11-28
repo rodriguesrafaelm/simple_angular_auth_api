@@ -15,20 +15,11 @@ defmodule SimpleAuthApiWeb.UsuarioController do
 
 
 
-  def register(conn, %{"user" => user_params}) do
-    with {:ok, %Usuario{} = user} <- Contas.add_user(user_params) do
-      conn
-      |> put_status(:created)
-      |> text("Usuário cadastrado com sucesso, usando o email:" <> " " <> user.email)
 
-    end
-  end
-
-
-  def verificar_disponinibilidade(conn, %{"username" => username}) do
+  def verificar_disponibilidade(conn, %{"username" => username}) do
     IO.inspect(username)
     body = Contas.verify_username_availability(username)
-
+    IO.inspect(body)
     conn
     |> put_status(200)
     |> json(body)
@@ -36,3 +27,14 @@ defmodule SimpleAuthApiWeb.UsuarioController do
 
 
 end
+
+
+
+ # def register(conn, %{"user" => user_params}) do
+  #   with {:ok, %Usuario{} = user} <- Contas.add_user(user_params) do
+  #     conn
+  #     |> put_status(:created)
+  #     |> text("Usuário cadastrado com sucesso, usando o email:" <> " " <> user.email)
+
+  #   end
+  # end
