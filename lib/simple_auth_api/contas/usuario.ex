@@ -2,12 +2,13 @@ defmodule SimpleAuthApi.Contas.Usuario do
   use Ecto.Schema
   import Ecto.Changeset
 
+
   schema "usuarios" do
     field :email, :string
     field :password, :string
     field :username, :string
-
     timestamps()
+    has_many :posts, SimpleAuthApi.Contas.Post
   end
 
   @doc false

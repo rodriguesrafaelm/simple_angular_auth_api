@@ -10,7 +10,13 @@ defmodule SimpleAuthApi.Contas do
 
 
 
-
+  def get_user_by_id(id) do
+    query = from u in Usuario, where: u.id == ^id
+    case Repo.one(query) do
+      nil -> {:error, "Usuário não encontrado"}
+      user -> {:ok, user}
+    end
+  end
 
   def add_user(attrs \\ %{}) do
     %Usuario{}
@@ -53,6 +59,14 @@ defmodule SimpleAuthApi.Contas do
 
     end
   end
+
+
+  def get_user_posts(user_id) do
+    user_id = String.to_integer(user_id)
+    query = from u in Usuario, preload: [:posts], where: u.id == ^user_id
+    Repo.one!(query)
+  end
+
 
   # Default \/
 

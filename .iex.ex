@@ -1,1 +1,0 @@
-alias SimpleAuthApi.Contas.Usuario

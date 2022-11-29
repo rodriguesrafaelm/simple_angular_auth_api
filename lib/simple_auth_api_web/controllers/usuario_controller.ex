@@ -2,7 +2,6 @@ defmodule SimpleAuthApiWeb.UsuarioController do
   use SimpleAuthApiWeb, :controller
 
   alias SimpleAuthApi.Contas
-  alias SimpleAuthApi.Contas.Usuario
 
 
 
@@ -25,6 +24,14 @@ defmodule SimpleAuthApiWeb.UsuarioController do
     |> json(body)
   end
 
+
+  def get_posts(conn, %{"id" => id}) do
+    body = %{nome: "rafael", idade: "22"}
+    IO.inspect(conn)
+    conn
+    |> put_status(200)
+    |> json(body)
+  end
 
 end
 
