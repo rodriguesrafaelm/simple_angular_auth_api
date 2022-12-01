@@ -6,20 +6,25 @@ defmodule SimpleAuthApiWeb.Router do
   end
 
   pipeline :auth do
+    plug :accepts, ["json"]
     plug SimpleAuthApi.Authentication.Guardian.AuthPipeline
   end
 
-  scope "/api", SimpleAuthApiWeb do
+  scope "/", SimpleAuthApiWeb do
     pipe_through :api
 
-    post "/user/login", SessionController, :new
-    post "/user/signup", SessionController, :create
-
-
-    get   "/user/get-post/:id", UsuarioController, :get_posts
-    post  "/user/get-user", UsuarioController, :verificar_disponibilidade
+    post "user/login", SessionController, :new
+    post "user/signup", SessionController, :create
+    get  "user/get-post/:id", UsuarioController, :get_posts
+    post "user/get-user", UsuarioController, :verificar_disponibilidade
 
   end
+  scope "/api", SimpleAuthApiWeb do
+    pipe_through :auth
+
+    get  "/user/get-post/:id", UsuarioController, :get_posts
+  end
+
 
   # Enables LiveDashboard only for development
   #

@@ -19,6 +19,7 @@ defmodule SimpleAuthApiWeb.UsuarioController do
     IO.inspect(username)
     body = Contas.verify_username_availability(username)
     IO.inspect(body)
+    IO.inspect(conn)
     conn
     |> put_status(200)
     |> json(body)
@@ -26,11 +27,11 @@ defmodule SimpleAuthApiWeb.UsuarioController do
 
 
   def get_posts(conn, %{"id" => id}) do
-    body = %{nome: "rafael", idade: "22"}
+    body = Contas.get_user_posts(id)
+    IO.inspect(body)
     IO.inspect(conn)
     conn
-    |> put_status(200)
-    |> json(body)
+    |> send_resp(200, body)
   end
 
 end

@@ -64,11 +64,18 @@ defmodule SimpleAuthApi.Contas do
   def get_user_posts(user_id) do
     user_id = String.to_integer(user_id)
     query = from u in Usuario, preload: [:posts], where: u.id == ^user_id
-    Repo.one!(query)
+    case Repo.one!(query).posts do
+      %{} -> [%{title: "não há publicações"}]
+      user_posts -> Jason.encode!(user_posts)
+    end
+
   end
 
 
+
+
   # Default \/
+
 
 
 

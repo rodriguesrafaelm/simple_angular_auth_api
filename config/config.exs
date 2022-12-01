@@ -43,4 +43,4 @@ import_config "#{config_env()}.exs"
 
 config :simple_auth_api, SimpleAuthApi.Authentication.Guardian,
   issuer: "simple_auth_api",
-  secret_key: System.get_env("SECRET_KEY")
+  secret_key: "temporarysecretkey"

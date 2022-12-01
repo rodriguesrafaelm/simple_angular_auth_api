@@ -3,7 +3,7 @@ defmodule SimpleAuthApi.Authentication.Guardian do
   alias SimpleAuthApi.Contas
 
   def subject_for_token(resource, _claims) do
-    sub = to_string(resource.username)
+    sub = to_string(resource.id)
     {:ok, sub}
   end
 

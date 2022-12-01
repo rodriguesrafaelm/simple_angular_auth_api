@@ -2,7 +2,7 @@ defmodule SimpleAuthApi.Contas.Post do
   use Ecto.Schema
   import Ecto.Changeset
 
-
+  @derive {Jason.Encoder, only: [:title, :content]}
   schema "posts" do
     field :title, :string
     field :content, :string
