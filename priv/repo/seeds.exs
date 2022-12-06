@@ -16,3 +16,4 @@ usuario = Usuario.registration_changeset(%Usuario{}, %{username: "teste", email:
 Repo.insert! usuario
 Repo.insert! %Post{usuario_id: 1, content: "Apenas um teste da API para verificar a funcionalidade dos posts"}
 Repo.insert! %Post{usuario_id: 1, content: "Apenas um outro teste da API para verificar a funcionalidade dos posts", i}
+
