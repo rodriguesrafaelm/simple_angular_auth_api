@@ -35,7 +35,7 @@ defmodule SimpleAuthApiWeb.SessionController do
 
   defp autorize(conn, %Usuario{} = user) do
 
-    {:ok, access_token, _claims} = Guardian.encode_and_sign(user, %{}, token_type: "access", ttl: {1, :hour})
+    {:ok, access_token, _claims} = Guardian.encode_and_sign(user, %{username: user.username}, token_type: "access", ttl: {1, :hour})
 
     conn
     |> put_resp_header("Access-Control-Expose-Headers", "x-access-token")

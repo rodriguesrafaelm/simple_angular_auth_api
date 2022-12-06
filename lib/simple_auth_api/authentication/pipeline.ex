@@ -3,7 +3,7 @@ defmodule SimpleAuthApi.Authentication.Guardian.AuthPipeline do
 
 
   use Guardian.Plug.Pipeline,
-    otp_app: :auth_api,
+    otp_app: :simple_auth_api,
     module: SimpleAuthApi.Authentication.Guardian,
     error_handler: SimpleAuthApi.Authentication.Guardian.ErrorHandler
 

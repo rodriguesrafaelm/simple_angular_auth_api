@@ -13,4 +13,9 @@ defmodule SimpleAuthApi.Authentication.Guardian do
     {:ok, resource}
   end
 
+  def get_user(conn) do
+    claims = SimpleAuthApi.Authentication.Guardian.Plug.current_claims(conn)
+    claims["sub"]
+  end
+
 end

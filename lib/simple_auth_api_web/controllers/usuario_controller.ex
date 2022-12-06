@@ -26,7 +26,7 @@ defmodule SimpleAuthApiWeb.UsuarioController do
   end
 
 
-  def get_posts(conn, %{"id" => id}) do
+  def listar_posts(conn, %{"id" => id}) do
     body = Contas.get_user_posts(id)
     IO.inspect(body)
     IO.inspect(conn)
@@ -34,6 +34,14 @@ defmodule SimpleAuthApiWeb.UsuarioController do
     |> send_resp(200, body)
   end
 
+  def publicar_post(conn, post_data) do
+    IO.inspect(post_data)
+    user = SimpleAuthApi.Authentication.Guardian.get_user(conn)
+    Contas.publish_user_post(user, post_data)
+    IO.puts("fim do token")
+    conn
+    |> send_resp(200, Jason.encode!(%{status: "sucesso"}))
+  end
 end
 
 

@@ -2,7 +2,7 @@ defmodule SimpleAuthApi.Contas.Usuario do
   use Ecto.Schema
   import Ecto.Changeset
 
-
+  @derive {Jason.Encoder, only: [:email, :username, :posts]}
   schema "usuarios" do
     field :email, :string
     field :password, :string

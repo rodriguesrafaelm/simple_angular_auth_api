@@ -7,7 +7,7 @@ defmodule SimpleAuthApi.Contas do
   alias SimpleAuthApi.Repo
 
   alias SimpleAuthApi.Contas.Usuario
-
+  alias SimpleAuthApi.Contas.Post
 
 
   def get_user_by_id(id) do
@@ -63,15 +63,22 @@ defmodule SimpleAuthApi.Contas do
 
   def get_user_posts(user_id) do
     user_id = String.to_integer(user_id)
-    query = from u in Usuario, preload: [:posts], where: u.id == ^user_id
-    case Repo.one!(query).posts do
-      %{} -> [%{title: "não há publicações"}]
-      user_posts -> Jason.encode!(user_posts)
+    query = from u in Usuario, where: u.id == ^user_id,
+                      preload: [posts: ^from(p in Post, order_by: [desc: p.inserted_at])]
+    case Repo.one(query) do
+      %Usuario{} = data -> Jason.encode!(data)
+      nil -> Jason.encode!(%{error: "Usuário inválido."})
     end
+
 
   end
 
-
+  def publish_user_post(user, post) do
+    %Post{}
+    |> Post.changeset(%{usuario_id: String.to_integer(user), content: post["post_data"], title: "temporario"})
+    |> IO.inspect
+    |> Repo.insert()
+  end
 
 
   # Default \/

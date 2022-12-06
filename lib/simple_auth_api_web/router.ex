@@ -21,8 +21,8 @@ defmodule SimpleAuthApiWeb.Router do
   end
   scope "/api", SimpleAuthApiWeb do
     pipe_through :auth
-
-    get  "/user/get-post/:id", UsuarioController, :get_posts
+    post "/user/post", UsuarioController, :publicar_post
+    get  "/user/get-post/:id", UsuarioController, :listar_posts
   end
 
 
