@@ -68,9 +68,19 @@ defmodule SimpleAuthApi.Contas do
       %Usuario{} = data -> Jason.encode!(data)
       nil -> Jason.encode!(%{error: "Usuário inválido."})
     end
+  end
+
+  def get_user_posts_username(username) do
+    query = from u in Usuario, where: u.username == ^username,
+                      preload: [posts: ^from(p in Post, order_by: [desc: p.inserted_at])]
+    case Repo.one(query) do
+      %Usuario{} = data -> Jason.encode!(data)
+      nil -> Jason.encode!(%{error: "Usuário inválido."})
+    end
 
 
   end
+
 
   def publish_user_post(user, post) do
     %Post{}

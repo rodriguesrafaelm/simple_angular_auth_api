@@ -15,5 +15,9 @@ alias SimpleAuthApi.Contas
 usuario = Usuario.registration_changeset(%Usuario{}, %{username: "teste", email: "teste@teste", password: "12345678"})
 Repo.insert! usuario
 Repo.insert! %Post{usuario_id: 1, content: "Apenas um teste da API para verificar a funcionalidade dos posts"}
-Repo.insert! %Post{usuario_id: 1, content: "Apenas um outro teste da API para verificar a funcionalidade dos posts", i}
+Repo.insert! %Post{usuario_id: 1, content: "Apenas um outro teste da API para verificar a funcionalidade dos posts"}
 
+usuario2 = Usuario.registration_changeset(%Usuario{}, %{username: "rafael", email: "rafael@email", password: "12345678"})
+Repo.insert! usuario2
+Repo.insert! %Post{usuario_id: 2, content: "Apenas um teste da API para verificar a funcionalidade dos posts"}
+Repo.insert! %Post{usuario_id: 2, content: "Apenas um outro teste da API para verificar a funcionalidade dos posts"}

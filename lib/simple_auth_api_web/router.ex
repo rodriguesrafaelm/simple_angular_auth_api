@@ -15,8 +15,11 @@ defmodule SimpleAuthApiWeb.Router do
 
     post "user/login", SessionController, :new
     post "user/signup", SessionController, :create
-    get  "user/get-post/:id", UsuarioController, :get_posts
     post "user/get-user", UsuarioController, :verificar_disponibilidade
+    get  "user/get-profile/:username", UsuarioController, :listar_posts_username
+    get  "user/get-post/:id", UsuarioController, :get_posts
+
+
 
   end
   scope "/api", SimpleAuthApiWeb do
