@@ -26,7 +26,6 @@ defmodule SimpleAuthApi.Contas do
 
   def get_user_by_username(username) do
     query = from u in Usuario, where: u.username == ^username
-    IO.inspect(Repo.one(query))
     case Repo.one(query) do
       nil -> {:error, "Usuário não encontrado"}
       user -> {:ok, user}
@@ -76,7 +75,6 @@ defmodule SimpleAuthApi.Contas do
   def publish_user_post(user, post) do
     %Post{}
     |> Post.changeset(%{usuario_id: String.to_integer(user), content: post["post_data"], title: "temporario"})
-    |> IO.inspect
     |> Repo.insert()
   end
 

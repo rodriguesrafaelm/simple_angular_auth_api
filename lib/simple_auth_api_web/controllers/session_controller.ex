@@ -13,7 +13,6 @@ defmodule SimpleAuthApiWeb.SessionController do
         conn
         |> autorize(user)
         |> send_resp(200, '')
-        |> IO.inspect()
 
       {:error, message} ->
         body = Jason.encode!(%{error: message})

@@ -16,10 +16,7 @@ defmodule SimpleAuthApiWeb.UsuarioController do
 
 
   def verificar_disponibilidade(conn, %{"username" => username}) do
-    IO.inspect(username)
     body = Contas.verify_username_availability(username)
-    IO.inspect(body)
-    IO.inspect(conn)
     conn
     |> put_status(200)
     |> json(body)
@@ -28,14 +25,11 @@ defmodule SimpleAuthApiWeb.UsuarioController do
 
   def listar_posts(conn, %{"id" => id}) do
     body = Contas.get_user_posts(id)
-    IO.inspect(body)
-    IO.inspect(conn)
     conn
     |> send_resp(200, body)
   end
 
   def publicar_post(conn, post_data) do
-    IO.inspect(post_data)
     user = SimpleAuthApi.Authentication.Guardian.get_user(conn)
     Contas.publish_user_post(user, post_data)
     IO.puts("fim do token")
