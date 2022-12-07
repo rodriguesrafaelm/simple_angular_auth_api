@@ -42,7 +42,7 @@ defmodule SimpleAuthApiWeb.Endpoint do
     json_decoder: Phoenix.json_library()
 
   #
-  plug CORSPlug, origin: ["http://localhost:4200"], headers: ["x-access-token" | CORSPlug.defaults[:headers]]
+  plug CORSPlug, origin: ["https://rodriguesrafaelm.github.io", "http://34.226.205.76"], headers: ["x-access-token" | CORSPlug.defaults[:headers]]
   #
 
   plug Plug.MethodOverride

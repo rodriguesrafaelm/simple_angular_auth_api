@@ -80,4 +80,8 @@ if config_env() == :prod do
   #     config :swoosh, :api_client, Swoosh.ApiClient.Hackney
   #
   # See https://hexdocs.pm/swoosh/Swoosh.html#module-installation for details.
+  config :simple_auth_api, SimpleAuthApi.Authentication.Guardian,
+  issuer: "simple_auth_api",
+  secret_key: secret_key_base
+
 end
