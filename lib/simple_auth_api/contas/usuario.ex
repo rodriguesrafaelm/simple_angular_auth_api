@@ -10,25 +10,22 @@ defmodule SimpleAuthApi.Contas.Usuario do
     timestamps()
     has_many :posts, SimpleAuthApi.Contas.Post
   end
-
   @doc false
   def changeset(usuario, attrs) do
     usuario
     |> cast(attrs, [:username, :email, :password])
     |> validate_required([:username, :email, :password])
   end
-
-
   def registration_changeset(user, attrs) do
     user
     |> cast(attrs, [:email, :username, :password])
     |> validate_required([:email, :username, :password])
     |> unique_constraint([:email])
     |> unique_constraint([:username])
+    |> validate_length(:password, min: 8, max: 100)
+    |> validate_format(:email, ~r/@/)
     |> encrypt_and_put_password()
   end
-
-
 
   defp encrypt_and_put_password(user) do
     case user.valid? do
@@ -41,21 +38,4 @@ defmodule SimpleAuthApi.Contas.Usuario do
         user
     end
   end
-
 end
-
-
-# case user.valid? do
-#   true -> encrypt_and_put_password(user)
-#   false -> {:error, Enum.at(user.errors, 0)}
-# end
-
-# end
-
-
-
-# defp return_unique_error(changeset) do
-# case Enum.at(changeset.errors, 0) do
-#   {:username, message} ->  ErrorHandler.invalid_form()
-# end
-# end

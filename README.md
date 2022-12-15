@@ -22,7 +22,6 @@ Aceito qualquer tipo de feedback, na verdade seria de grande ajuda e eu agradece
 #### Consultas sem autenticação
 - `POST` /user/get-user
 - `GET`  /user/get-profile/:id
-- `GET`  /user/get-post/:id
 
 #### Apenas usuários autenticados
 

@@ -12,16 +12,12 @@ defmodule SimpleAuthApiWeb.UsuarioController do
     render(conn, "index.json", usuarios: usuarios)
   end
 
-
-
-
   def verificar_disponibilidade(conn, %{"username" => username}) do
     body = Contas.verify_username_availability(username)
     conn
     |> put_status(200)
     |> json(body)
   end
-
 
   def listar_posts(conn, %{"id" => id}) do
     body = Contas.get_user_posts(id)

@@ -19,4 +19,8 @@ defmodule SimpleAuthApi.ContasFixtures do
 
     usuario
   end
+
+  def novo_usuario_fixture() do
+      %{email: "novo email", password: "nova senha", username: "novo usuario"}
+  end
 end
