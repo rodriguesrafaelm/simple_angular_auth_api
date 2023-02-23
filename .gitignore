@@ -23,5 +23,5 @@ erl_crash.dump
 simple_auth_api-*.tar
 
 Dockerfile
-
+.dockerignore   
 git-filter-repo
