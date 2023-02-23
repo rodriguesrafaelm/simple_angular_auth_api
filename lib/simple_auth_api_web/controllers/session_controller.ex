@@ -7,7 +7,7 @@ defmodule SimpleAuthApiWeb.SessionController do
 
   action_fallback SimpleAuthApiWeb.FallbackController
 
-  def new(conn, %{"username" => username, "password" => password}) do
+  def login(conn, %{"username" => username, "password" => password}) do
     case Contas.authenticate_user(username, password) do
       {:ok, user} ->
         conn
@@ -33,9 +33,7 @@ defmodule SimpleAuthApiWeb.SessionController do
 
 
   defp autorize(conn, %Usuario{} = user) do
-
     {:ok, access_token, _claims} = Guardian.encode_and_sign(user, %{username: user.username}, token_type: "access", ttl: {1, :hour})
-
     conn
     |> put_resp_header("Access-Control-Expose-Headers", "x-access-token")
     |> put_resp_header("x-access-token", access_token)

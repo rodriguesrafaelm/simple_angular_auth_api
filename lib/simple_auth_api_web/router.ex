@@ -8,12 +8,17 @@ defmodule SimpleAuthApiWeb.Router do
   pipeline :auth do
     plug :accepts, ["json"]
     plug SimpleAuthApi.Authentication.Guardian.AuthPipeline
+
+    plug Hammer.Plug, [
+      rate_limit: {"auth:requests", 60_000, 30},
+      by: :ip
+    ]
   end
 
   scope "", SimpleAuthApiWeb do
     pipe_through :api
 
-    post "/user/login", SessionController, :new
+    post "/user/login", SessionController, :login
     post "/user/signup", SessionController, :create
     post "/user/get-user", UsuarioController, :verificar_disponibilidade
     get  "/user/get-profile/:username", UsuarioController, :listar_posts_username

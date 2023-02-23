@@ -46,7 +46,9 @@ defmodule SimpleAuthApi.MixProject do
       {:plug_cowboy, "~> 2.5"},
       {:pbkdf2_elixir, "~> 2.0"},
       {:guardian, "~> 2.0"},
-      {:cors_plug, "~> 2.0"}
+      {:cors_plug, "~> 2.0"},
+      {:hammer, "~>6.0"},
+      {:hammer_plug, "~> 3.0"}
     ]
   end
 
